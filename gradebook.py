@@ -12,7 +12,8 @@ try:
         print("***-Grade Book menu-***")
         print("1. Add students and score")
         print("2. View all students and average score")
-        print("3. Exit")
+        print("3. Delete student")
+        print("4. Exit")
         user_choice = input("Enter your choice: ")
         print("-" * 20)
         if user_choice == "1":
@@ -38,6 +39,19 @@ try:
                 print("No students added")
             print("-" * 20)
         elif user_choice == "3":
+            print("**-Delete student-**")
+            del_name = input("Enter student name to delete: ").strip()
+            if del_name in students:
+                del students[del_name]
+                del std_averages[del_name]
+                with open("students.json", "w") as file:
+                    json.dump(students, file)
+                print(f"student {del_name} successfully deleted")
+                print("-" * 20)
+            else:
+                print("Student not found")
+                print("-" * 20)
+        elif user_choice == "4":
             print("Exiting...")
             break
         else:
