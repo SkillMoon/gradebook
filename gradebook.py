@@ -1,11 +1,13 @@
 try:
     students = dict()
+    std_averages = dict()
     while True:
         print("***-Grade Book menu-***")
         print("1. Add students and score")
         print("2. View all students and average score")
         print("3. Exit")
         user_choice = input("Enter your choice: ")
+        print("-" * 20)
         if user_choice == "1":
             print("**-Add student-**")
             std_name = input("Enter student name: ").strip()
@@ -13,9 +15,19 @@ try:
             std_scores = [float(score) for score in std_scores]
             students[std_name] = std_scores
             std_scores = []
-            print(students)
+            print(f"student {std_name} successfully added")
+            print("-" * 20)
         elif user_choice == "2":
-            print("You chose to view all students")
+            print("**-View students-**")
+            if students:
+                for std_name, std_scores in students.items():
+                    avg_score = sum(std_scores) / len(std_scores)
+                    std_averages[std_name] = round(avg_score, 2)
+                for std_name, std_average in std_averages.items():
+                    print(f"{std_name} average score: {std_average}")
+            else:
+                print("No students added")
+            print("-" * 20)
         elif user_choice == "3":
             print("Exiting...")
             break
