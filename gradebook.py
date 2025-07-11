@@ -1,5 +1,12 @@
+import json
+import  os
 try:
     students = dict()
+    if os.path.exists('students.json'):
+        with open('students.json', "r") as file:
+            students = json.load(file)
+    else:
+        students = {}
     std_averages = dict()
     while True:
         print("***-Grade Book menu-***")
@@ -15,6 +22,8 @@ try:
             std_scores = [float(score) for score in std_scores]
             students[std_name] = std_scores
             std_scores = []
+            with open("students.json", "w") as file:
+                json.dump(students, file)
             print(f"student {std_name} successfully added")
             print("-" * 20)
         elif user_choice == "2":
